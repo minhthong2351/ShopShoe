@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+		<title>Shop</title>
+		<style>
+			.error {
+				color: red;
+			}
+		</style>
+		<!-- Google font -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+		<!-- Slick -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/slick.css}"/>
+		<link type="text/css" rel="stylesheet" th:href="@{/css/slick-theme.css}"/>
+
+		<!-- nouislider -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+
+		<!-- Font Awesome Icon -->
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" th:href="@{/css/register.css}"/>
+    </head>
+	<body>
+		<!-- HEADER -->
+		<div th:replace="/header"></div>
+		<!-- /HEADER -->
+
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a th:href="@{/}">Home</a></li>
+						<li><a th:href="@{/store/page}">Store</a></li>
+						<!--						<li><a href="contact.html">Contact</a></li>-->
+					</ul>
+					<!-- /NAV -->
+				</div>
+				
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<section class="vh-100">
+                    <div class="container py-5 h-100">
+                      <div class="row text-center" style="display: flex">
+                          <form style="margin: auto; border: none" class="col-md-6 col-lg-5 col-xl-5 offset-xl-1 formregister" th:action="@{/registration}" method="post"
+								th:object="${user}">
+                            <h2>Register Account!</h2>
+							  <!-- success message -->
+							  <div th:if="${param.success}">
+								  <div class="alert alert-info" style="background-color: green"> <a style="color: white">You've successfully registered! </a> </div>
+							  </div>
+							  <div th:if="${param.emailerror}">
+								  <div class="alert alert-info" style="background-color: red"> <a style="color: white">Email Invalid</a> </div>
+							  </div>
+							  <div th:if="${param.rePassworderror}">
+								  <div class="alert alert-info" style="background-color: red"> <a style="color: white">Re-password mismatch </a> </div>
+							  </div>
+							  <div th:if="${param.usererror}">
+								  <div class="alert alert-info" style="background-color: red; text-decoration-color: black"> <a style="color: white">Username Invalid </a> </div>
+							  </div>
+                            <!-- Username input -->
+                            <div class="form-outline mb-4 "> 
+                              <label class="form-label" for="userName"><i class="fa fa-user"></i> Username</label>
+								<p th:if="${#fields.hasErrors('userName')}" style="color: red" th:errors="*{userName}"> Username is required </p>
+                              <input id="userName" type="text" th:field="*{userName}" required autofocus="autofocus"  class="form-control form-control-lg" />
+                            </div>
+							  <!-- Name input -->
+								  <div class="form-outline mb-4">
+									  <label class="form-label" ><i class="fa fa-user"></i> First Name</label>
+									  <p th:if="${#fields.hasErrors('firstName')}" style="color: red" th:errors="*{firstName}"> Username is required </p>
+									  <input id="firstName" th:field="*{firstName}"
+											 required autofocus="autofocus" type="text"  class="form-control form-control-lg" />
+								  </div>
+
+								  <div class="form-outline mb-4">
+									  <label class="form-label" ><i class="fa fa-user"></i> Last Name</label>
+									  <p th:if="${#fields.hasErrors('lastName')}" style="color: red" th:errors="*{lastName}"> Username is required </p>
+									  <input id="lastName" th:field="*{lastName}"
+											 required autofocus="autofocus" type="text"  class="form-control form-control-lg" />
+								  </div>
+							  <!-- Name input -->
+							  <div class="form-outline mb-4 ">
+
+							  </div>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                              <label class="form-label" ><i class="fa fa-lock"></i> Password</label>
+                              <input id="password" th:field="*{password}" required autofocus="autofocus" type="password" class="form-control form-control-lg" />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" ><i class="fa fa-lock"></i> Re-enter Password</label>
+                                <input type="password" th:name="rePassword" class="form-control form-control-lg" />
+                            </div>
+							  <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" ><i class="fa fa-envelope"></i> Email</label>
+                                <input id="email" th:field="*{email}" required
+									   autofocus="autofocus" type="email"  class="form-control form-control-lg" />
+                            </div>
+							  <!-- Phone input -->
+                            <div class="form-outline mb-4">
+                                <label class="form-label" ><i class="fa fa-phone"></i> Phone Number</label>
+                                <input id="phone" th:field="*{phone}" type="text"  class="form-control form-control-lg" />
+                            </div>
+							  <!-- Address input -->
+							  <div class="form-outline mb-4">
+								  <label class="form-label" ><i class="fa fa-address-card"></i> Address</label>
+								  <input id="address" th:field="*{address}" type="text"  class="form-control form-control-lg" />
+							  </div>
+                            <div class="d-flex justify-content-around align-items-center mb-4">
+                              <a class = "fpg" href="/login">Login here!</a>
+                            </div>
+                  
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                  
+                            <div class="divider d-flex align-items-center my-4">
+                              <p class="text-center fw-bold mx-3 mb-0 text-muted" style="margin-top: 10px;">OR</p>
+                            </div>
+                  
+                            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
+                              <i class="fa fa-facebook me-2"></i> login with Facebook
+                            </a>
+                            <a class="btn btn-primary btn-lg btn-block" style="background-color: #f11414" href="#!" role="button">
+                              <i class="fa fa-google me-2"></i> login with Google</a>
+                  
+                          </form>
+                        </div>
+                    </div>
+                  </section>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+		<div th:replace="/footer"></div>
+		<!-- /FOOTER -->
+
+		<!-- jQuery Plugins -->
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/slick.min.js}"></script>
+		<script th:src="@{/js/nouislider.min.js}"></script>
+		<script th:src="@{/js/jquery.zoom.min.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+
+	</body>
+</html>

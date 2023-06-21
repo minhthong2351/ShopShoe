@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Shop</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/slick.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/slick-theme.css}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/detail.css}"/>
+
+
+</head>
+<body>
+<!-- HEADER -->
+<div th:replace="/header"></div>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/store/page}">Store</a></li>
+                <!--						<li><a href="contact.html">Contact</a></li>-->
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+
+<div class='container1'>
+    <div class='background-element' id='background-element'>
+
+    </div>
+    <div class='highlight-window' id='product-img1'>
+            <img th:src="@{'/img/'+${product.img}}" alt="">
+    </div>
+    <div class='window'>
+        <div class='main-content' >
+            <h2 th:text= "${product.name}"></h2>
+            <h1>LEONARD COAT</h1>
+            <h3>MINIMALISTIC COAT IN COTTON-BLEND</h3>
+            <div class='description' id='description' th:text="${product.description}" >
+                </div>
+            <div class='highlight-window  mobile' id='product-img'><div class='highlight-overlay' id='highlight-overlay-mobile'></div></div>
+            <div class='options'>
+                <div class='color-options'>
+                    Brand:
+                    <a th:text="${product.brand.name}"></a>
+                </div>
+                <div class='size-picker'>
+                    Size:
+                    <div class='range-picker' id='range-picker'>
+                        <div>44</div><div>46</div><div>48</div><div class='active'>50</div><div>52</div><div>54</div>
+                    </div>
+                    <a class='small align-right' href='#'>VIEW SIZE-CHART</a>
+                </div>
+            </div>
+            <div class='divider'></div>
+
+            <div class='purchase-info'>
+                <div class='price' th:text="${product.price} +'$'"></div>
+                <a th:href="@{'/shopping-cart/add/'+${product.id}}"> <button style="color: white">ADD TO CART</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+<!-- FOOTER -->
+<footer id="footer" th:replace="/footer">
+</footer>
+<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

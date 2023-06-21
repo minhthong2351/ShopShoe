@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>Shop</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+  <!-- Slick -->
+  <link type="text/css" rel="stylesheet" th:href="@{/css/slick.css}"/>
+  <link type="text/css" rel="stylesheet" th:href="@{/css/slick-theme.css}"/>
+
+  <!-- nouislider -->
+  <link type="text/css" rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+
+  <!-- Font Awesome Icon -->
+  <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+  <!-- Custom stlylesheet -->
+  <link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+<body>
+  <!-- HEADER -->
+  <div th:replace="/header"></div>
+  <!-- /HEADER -->
+  <div class="tm-block-col tm-col-account-settings">
+    <div class="tm-bg-primary-dark tm-block tm-block-settings">
+      <h2 class="tm-block-title" style="margin-left:20px; margin-top: 20px ">Your Profile</h2>
+      <form style="max-width: 1200px; display: block; margin: auto" class="tm-signup-form row" th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <div class="form-group col-lg-6" style="display: none">
+          <label>UserName</label>
+          <input
+                  id="userName"
+                  name="name"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.userName}"
+                  th:field="*{userName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>Address</label>
+          <input
+                  name="address"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.role}"
+                  th:field="*{role}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label >First Name</label>
+          <input
+                  id="firstName"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.firstName}"
+                  th:field="*{firstName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label>Last Name</label>
+          <input
+                  id="lastName"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.lastName}"
+                  th:field="*{lastName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label>Email</label>
+          <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  class="form-control validate"
+                  th:placeholder="${user.email}"
+                  th:field="*{email}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label for="phone">Phone</label>
+          <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.phone}"
+                  th:field="*{phone}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" >
+          <label>Address</label>
+          <input
+                  name="address"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.address}"
+                  th:field="*{address}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>password</label>
+          <input
+                  id="password"
+                  name="name"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.password}"
+                  th:field="*{password}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div style="" class="form-group  col-12">
+          <button onclick="function myFunctionpr1() {
+                  alert('Change success! PROFILE');
+              }
+              myFunctionpr1()"
+                  type="submit"
+                  class="btn btn-primary btn-block text-uppercase"
+                  style="max-width: 700px;display:block; margin: auto"
+          >
+            Edit Profile
+          </button>
+        </div>
+      </form>
+      <h2 class="tm-block-title" style="margin-left:20px; margin-top: 20px ">Change Password</h2>
+      <form style="max-width: 1200px; display: block; margin: auto" class="tm-signup-form row" th:action="@{/changepassword/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <div class="form-group col-lg-6" style="display: none">
+          <label>UserName</label>
+          <input
+                  name="name"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.userName}"
+                  th:field="*{userName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>Address</label>
+          <input
+                  name="address"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.role}"
+                  th:field="*{role}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label >First Name</label>
+          <input
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.firstName}"
+                  th:field="*{firstName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>Last Name</label>
+          <input
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.lastName}"
+                  th:field="*{lastName}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>Email</label>
+          <input
+                  name="email"
+                  type="email"
+                  class="form-control validate"
+                  th:placeholder="${user.email}"
+                  th:field="*{email}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label for="phone">Phone</label>
+          <input
+                  name="phone"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.phone}"
+                  th:field="*{phone}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>Address</label>
+          <input
+                  name="address"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.address}"
+                  th:field="*{address}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6" style="display: none">
+          <label>password</label>
+          <input
+                  name="name"
+                  type="text"
+                  class="form-control validate"
+                  th:placeholder="${user.password}"
+                  th:field="*{password}"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label>New Password</label>
+          <input
+                  name="name"
+                  type="password"
+                  class="form-control validate"
+                  th:name="newPassword"
+                  style="color: black; background-color: white"
+          />
+        </div>
+        <div class="form-group col-lg-6">
+          <label>Re-New Password</label>
+          <input
+                  name="name"
+                  type="password"
+                  class="form-control validate"
+                  th:name="rePassword"
+          />
+        </div>
+        <div class="form-group  col-12">
+          <button
+                  onclick="function myFunctionpr2() {
+                  alert('Change success! PASSWORD');
+              }
+              myFunctionpr2()"
+                  type="submit"
+                  class="btn btn-primary btn-block text-uppercase"
+                  style="max-width: 700px;display:block; margin: auto"
+          >
+            Change
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <div th:replace="/footer"></div>
+  <!-- /FOOTER -->
+
+  <!-- jQuery Plugins -->
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/slick.min.js}"></script>
+  <script th:src="@{/js/nouislider.min.js}"></script>
+  <script th:src="@{/js/jquery.zoom.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

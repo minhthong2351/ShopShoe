@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Edit Product - Dashboard Admin Template</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+    />
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" th:href="@{/admin/css/fontawesome.min.css}" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" th:href="@{/admin/css/bootstrap.min.css}" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" th:href="@{/admin/css/templatemo-style.css}">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+	-->
+  </head>
+
+  <body>
+  <nav class="navbar navbar-expand-xl">
+    <div class="container h-100">
+      <a class="navbar-brand" href="add-product.html">
+        <h1 class="tm-site-title mb-0">Accounts Admin</h1>
+      </a>
+      <button
+              class="navbar-toggler ml-auto mr-0"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars tm-nav-icon"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto h-100">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/admin-home}">
+              <i class="fas fa-tachometer-alt"></i> Dashboard
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" th:href="@{/admin/admin-orders}">
+              <i class="fas fa-shopping-cart"></i> Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" th:href="@{/admin/admin-products}">
+              <i class="fas fa-shopping-cart"></i> Products
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/admin-accounts}">
+              <i class="far fa-user"></i> Accounts
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="fas fa-cog"></i>
+              <span> Settings <i class="fas fa-angle-down"></i> </span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" th:href="@{/logout}" style="color: white">Sign Out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+              </div>
+            </div>
+            <div class="row tm-edit-product-row">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <form class="tm-edit-product-form" th:action="@{/admin/update-product/{id}(id=${product.id})}" th:object="${product}" method="post">
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Product Name
+                    </label>
+                    <input
+                            th:placeholder="${product.name}"
+                            th:field="*{name}"
+                      id="name"
+                      name="name"
+                      type="text"
+                      class="form-control validate"
+                            style="background-color: white; color: black"
+                    />
+                  </div>
+                  <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-4">
+                        <label>
+                          Price
+                        </label>
+                        <input
+                                th:placeholder="${product.price + '$'}"
+                                th:field="*{price}"
+                          name="expire_date"
+                          type="text"
+                          class="form-control validate"
+                                style="background-color: white; color: black"
+                        />
+                      </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-4">
+                      <label>
+                        Sell Price
+                      </label>
+                      <input
+                              th:placeholder="${product.sell_price + '$'}"
+                              th:field="*{sell_price}"
+                              name="expire_date"
+                              type="text"
+                              class="form-control validate"
+                              style="background-color: white; color: black"
+                      />
+                    </div>
+                      <div class="form-group mb-3 col-xs-12 col-sm-4">
+                        <label>
+                          MaSP
+                        </label>
+                        <input
+                                th:placeholder="${product.masp}"
+                                th:field="*{masp}"
+                                name="expire_date"
+                                type="text"
+                                class="form-control validate"
+                                style="background-color: white; color: black"
+                        />
+                      </div>
+                </div>
+                  <div class="form-group mb-3">
+                    <label
+                      >Description</label
+                    >
+                    <textarea
+                            th:placeholder="${product.description}"
+                            th:field="*{description}"
+                      class="form-control validate tm-small"
+                      rows="5"
+                      required
+                            style="background-color: white; color: black"
+                    ></textarea>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                            for="category"
+                    >Category</label
+                    >
+                    <select
+                            th:field="*{categories}"
+                            class="custom-select tm-select-accounts"
+                            id="category"
+                            style="background-color: white; color: black"
+                    >
+
+                      <option th:each="categorie : ${categories}" th:value="${categorie.id}" th:text="${categorie.name}" th:selected="${categorie} == ${product.categories.name}"></option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                            for="category"
+                    >Brand</label
+                    >
+                    <select
+                            th:field="*{brand}"
+                            class="custom-select tm-select-accounts"
+                            style="background-color: white; color: black"
+                    >
+
+                      <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}" th:selected="${brand} == ${product.brand.name}"></option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <div class="form-group mb-3 col-xs-12 col-sm-8">
+                      <label
+                              for="stock"
+                      >Quantity
+                      </label>
+                      <input
+                              th:placeholder="${product.quantity}"
+                              th:field="*{quantity}"
+                              name="stock"
+                              type="text"
+                              class="form-control validate"
+                              required
+                              style="background-color: white; color: black"
+                      />
+                    </div>
+                    <div class="form-group mb-3 col-xs-12 col-sm-4">
+                      <label
+                              for="stock"
+                      >Quantity Sold
+                      </label>
+                      <input
+                              th:placeholder="${product.quantity_sold}"
+                              th:field="*{quantity_sold}"
+                              id="stock"
+                              name="stock"
+                              type="text"
+                              class="form-control validate"
+                              required
+                              style="background-color: white; color: black"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label
+                            for="name"
+                    >Image
+                    </label>
+                    <input
+                            th:placeholder="${product.img}"
+                            th:field="*{img}"
+                            name="name"
+                            type="text"
+                            class="form-control validate"
+                            required
+                            style="background-color: white; color: black"
+                    />
+                  </div>
+                  
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                <div class="tm-product-img-edit mx-auto">
+                  <img th:src="@{/img/{img} (img=${product.img})}" alt="Product image" class="img-fluid d-block mx-auto">
+                </div>
+              </div>
+              <div class="col-12">
+                <button onclick="function myFunctionp11() {
+                  alert('Edit success! PRODUCT');
+              }
+              myFunctionp11()" type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
+              </div>
+              <div class="form-group  col-12">
+                <label class="tm-hide-sm">&nbsp;</label>
+                <a onclick="function myFunctionp21() {
+                  alert('Delete success! PRODUCT');
+              }
+              myFunctionp21()"
+                        class="btn btn-primary btn-block text-uppercase"
+                        th:href="@{/admin/delete-product/{id}(id=${product.id})}"
+                >
+                  Delete Product
+                </a>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+        <div class="col-12 font-weight-light">
+          <p class="text-center text-white mb-0 px-4 small">
+            Copyright &copy; <b>2018</b> All rights reserved. 
+            
+            Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+        </p>
+        </div>
+    </footer> 
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+  </body>
+</html>

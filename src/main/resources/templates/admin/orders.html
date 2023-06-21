@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Product Page - Admin HTML Template</title>
+  <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+  />
+  <!-- https://fonts.google.com/specimen/Roboto -->
+  <link rel="stylesheet" th:href="@{/admin/css/fontawesome.min.css}" />
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" th:href="@{/admin/css/bootstrap.min.css}" />
+  <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" th:href="@{/admin/css/templatemo-style.css}">
+  <!--
+  Product Admin CSS Template
+  https://templatemo.com/tm-524-product-admin
+  -->
+</head>
+
+<body id="reportsPage">
+<nav class="navbar navbar-expand-xl">
+  <div class="container h-100">
+    <a class="navbar-brand" href="add-product.html">
+      <h1 class="tm-site-title mb-0">Accounts Admin</h1>
+    </a>
+    <button
+            class="navbar-toggler ml-auto mr-0"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars tm-nav-icon"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto h-100">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/admin-home}">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active" th:href="@{/admin/admin-orders}">
+            <i class="fas fa-shopping-cart"></i> Orders
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/admin-products}">
+            <i class="fas fa-shopping-cart"></i> Products
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/admin-accounts}">
+            <i class="far fa-user"></i> Accounts
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false">
+            <i class="fas fa-cog"></i>
+            <span> Settings <i class="fas fa-angle-down"></i> </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" th:href="@{/logout}" style="color: white">Sign Out</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div class="row tm-content-row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-products">
+        <div class="tm-product-table-container">
+          <table class="table table-hover tm-table-small tm-product-table">
+            <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">USER</th>
+              <th scope="col">ADDRESS</th>
+              <th scope="col">DATE ORDER</th>
+              <th scope="col">TOTAL</th>
+              <th scope="col">STATUS</th>
+              <th style="text-align: center" scope="col">VIEW</th>
+              <th style="text-align: center" scope="col">DONE</th>
+              <th style="text-align: center" scope="col">CANCEL</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}" th:if="${order.status == 'Shipping'}">
+              <th scope="row"><input type="checkbox" /></th>
+              <td class="tm-product-name" th:text="${order.user.userName}"></td>
+              <td th:text="${order.address}"></td>
+              <td th:text="${order.orderDate}"></td>
+              <td th:text="${order.total}"></td>
+              <td style="color: yellow" th:text="${order.status}"></td>
+              <td style="text-align: center"><a th:href="@{/admin/order-details/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+              <td onclick="function myFunction1() {
+                  alert('Done! ORDER');
+              }
+              myFunction1()"style="text-align: center"><a th:href="@{/admin/done-order/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-check ml-2"></i></a></td>
+              <td onclick="function myFunction2() {
+                  alert('Cancel! ORDER');
+              }
+              myFunction2()" style="text-align: center"><a th:href="@{/admin/cancel-order/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-times ml-2"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- table container -->
+        <a
+                th:href="@{/admin/add-product}"
+                class="btn btn-primary btn-block text-uppercase mb-3">Done Orders</a>
+        <a
+                href="edit-product.html"
+                class="btn btn-primary btn-block text-uppercase mb-3">Cancel Orders</a>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <div class=" tm-bg-primary-dark tm-block-product-categories" style="padding: 8px 16px 8px 16px">
+        <h2 style="color: lawngreen" class="tm-block-title">Order Complete</h2>
+        <div class="tm-product-table-container">
+          <table class="table tm-table-small tm-product-table">
+            <thead>
+            <tr>
+              <th scope="col">USER</th>
+              <th scope="col">ADDRESS</th>
+              <th scope="col">DATE ORDER</th>
+              <th scope="col">TOTAL</th>
+              <th style="text-align: center" scope="col">VIEW</th>
+              <th style="text-align: center" scope="col">DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}" th:if="${order.status == 'Completed'}">
+              <td class="tm-product-name" th:text="${order.user.userName}"></td>
+              <td th:text="${order.address}"></td>
+              <td th:text="${order.orderDate}"></td>
+              <td th:text="${order.total}"></td>
+              <td style="text-align: center"><a th:href="@{/admin/order-details/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+              <td onclick="function myFunction4() {
+                  alert('Delete success! ORDER');
+              }
+              myFunction4()" style="text-align: center"><a th:href="@{/admin/delete-order/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-times ml-2"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- table container -->
+        <form>
+          <button type="submit" class="btn btn-primary btn-block text-uppercase mb-3">
+            Delete All
+          </button>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block-product-categories" style="padding: 8px 16px 8px 16px">
+        <h2 style="color: red" class="tm-block-title">Order Cancel</h2>
+        <div class="tm-product-table-container">
+          <table class="table tm-table-small tm-product-table">
+            <thead>
+            <tr>
+              <th scope="col">USER</th>
+              <th scope="col">ADDRESS</th>
+              <th scope="col">DATE ORDER</th>
+              <th scope="col">TOTAL</th>
+              <th style="text-align: center" scope="col">VIEW</th>
+              <th style="text-align: center" scope="col">DELETE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}" th:if="${order.status == 'Canceled'}">
+              <td class="tm-product-name" th:text="${order.user.userName}"></td>
+              <td th:text="${order.address}"></td>
+              <td th:text="${order.orderDate}"></td>
+              <td th:text="${order.total}"></td>
+              <td style="text-align: center"><a th:href="@{/admin/order-details/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+              <td onclick="function myFunction3() {
+                  alert('Delete success! ORDER');
+              }
+              myFunction3()"style="text-align: center"><a th:href="@{/admin/delete-order/{id}(id=${order.id})}" class="btn btn-primary"><i class="fas fa-times ml-2"></i></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- table container -->
+        <form>
+          <button type="submit"  class="btn btn-primary btn-block text-uppercase mb-3">
+            Delete All
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="tm-footer row tm-mt-small">
+  <div class="col-12 font-weight-light">
+    <p class="text-center text-white mb-0 px-4 small">
+      Copyright &copy; <b>2018</b> All rights reserved.
+
+      Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+    </p>
+  </div>
+</footer>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script>
+  $(function() {
+    $(".tm-product-name").on("click", function() {
+      window.location.href = "edit-product.html";
+    });
+  });
+</script>
+</body>
+</html>

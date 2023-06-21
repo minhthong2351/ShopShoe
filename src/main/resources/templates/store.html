@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Shop</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" th:href="@{/css/slick.css}"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/slick-theme.css}"/>
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" th:href="@{/css/nouislider.min.css}"/>
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" th:href="@{/css/style.css}"/>
+
+
+</head>
+<body>
+<!-- HEADER -->
+<div th:replace="/header"></div>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li><a th:href="@{/}">Home</a></li>
+						<li class="active"><a th:href="@{/store/page}">Store</a></li>
+						<!--						<li><a href="contact.html">Contact</a></li>-->
+					</ul>
+					<!-- /NAV -->
+				</div>
+				
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#">All Categories</a></li>
+							<li><a href="#">Accessories</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Categories</h3>
+							<div class="checkbox-filter">
+								<div class="input-checkbox" th:each="categorie : ${categories}">
+									<input class="checkcate" th:id="${categorie.name}" th:value="${categorie.name}" type="checkbox" >
+									<label th:for="${categorie.name}">
+										<span></span>
+										<a th:text="${categorie.name}"></a>
+									</label>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Price</h3>
+							<div class="price-filter">
+								<div class="input-number price-min">
+									<h5 class="aside-title">Min</h5>
+									<input id="price-min" type="number"> 
+								</div>
+								<span>-</span>
+								<div class="input-number price-max">
+									<h5 class="aside-title">Max</h5>
+									<input id="price-max" type="number" value="$">
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Brand</h3>
+							<div class="checkbox-filter" >
+								<div class="input-checkbox" th:each="brand : ${brands}">
+									<input class="checkbrand"  type="checkbox" th:id="${brand.name}" th:value="${brand.name}">
+									<label th:for="${brand.name}">
+										<span></span>
+										<a th:text="${brand.name}"></a>
+									</label>
+								</div>
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						
+						<!-- /aside Widget -->
+					</div>
+					<!-- /ASIDE -->
+
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+						<!-- store top filter -->
+						<div class="store-filter clearfix"> 
+							<div class="store-sort">
+								<input id="myInput" type="text" placeholder="Search..">
+							</div>
+							<ul class="store-grid">
+								<li class="active"><i class="fa fa-th"></i></li>
+								<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+							</ul>
+						</div>
+						<!-- /store top filter -->
+						<!-- store products -->
+						<div class="row listp">
+							<!-- product -->
+							<div class="list-product col-md-4 col-xs-6"  th:each="p:${pages.content}" >
+								<div class="product" >
+									<div class="product-img" th:id="${p.name}">
+										<a th:href="@{'/detail?id='+${p.id}}"><img th:src="@{/img/{img} (img=${p.img})}" alt=""></a>
+										<div class="product-label"><span class="sale">-30%</span><span class="new" th:text="${p.categories.name}"></span></div>
+									</div>
+									<div class="product-body">
+										<p class="product-brand" th:text="${p.brand.name}"></p>
+										<h3 class="product-name" th:text="${p.name}"><a href="#"></a></h3>
+										<h4 class="product-price" th:text="${p.sell_price} + '$'"></h4>
+										<div class="product-rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+										</div>
+										<div class="product-btns">
+											<a onclick="function myFunctionw1() {alert('Add success! WISHLIST');}myFunctionw1()"
+													th:href="@{/wishlist/{username}/{productId}(productId=${p.id}, username=${#authentication.name})}"><i class="fa fa-heart-o"></i></a>
+											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltip">add to compare</span></button>
+											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltip">quick view</span></button>
+										</div>
+									</div>
+									<div class="add-to-cart">
+										<a th:href="@{'/shopping-cart/add/'+${p.id}}"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+									</div>
+								</div>
+							</div>
+							<!-- /product -->
+					</div>
+						<!-- /store products -->
+
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix">
+							<ul class="store-pagination">
+								<li class="active"><a th:href="@{/store/page?p=0}">Đầu</a></li>
+								<li><a th:href="@{'/store/page?p='+${pages.number -1}}">Trước</a></li>
+								<li><a th:href="@{'/store/page?p='+${pages.number+1}}">Tiếp</a></li>
+								<li><a th:href="@{'/store/page?p='+${pages.totalPages -1}}">Cuối</a></li>
+							</ul>
+						</div>
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- NEWSLETTER -->
+		<div id="newsletter" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input class="input" type="email" placeholder="Enter Your Email">
+								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul class="newsletter-follow">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /NEWSLETTER -->
+
+		<!-- FOOTER -->
+
+		<div th:replace="/footer"></div>
+		<!-- /FOOTER -->
+
+<!-- jQuery Plugins -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/slick.min.js}"></script>
+<script th:src="@{/js/nouislider.min.js}"></script>
+<script th:src="@{/js/jquery.zoom.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/store.js}"/></script>
+
+<script>
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$(".product-name").filter(function() {
+				$(this).parent().parent().parent().toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+</script>
+</body>
+</html>
